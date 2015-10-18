@@ -1,12 +1,12 @@
 {
-    "contents" : "",
+    "contents" : "library(ElemStatLearn)\ndata(vowel.train)\ndata(vowel.test)\nvowel.train$y <- as.factor(vowel.train$y)\nvowel.test$y <- as.factor(vowel.test$y)\nset.seed(33833)\nrf<-train(outcome ~ ., data=vowel.train, method=\"rf\", prox=TRUE, ntree=500) \n",
     "created" : 1445171272714.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2902240961",
     "id" : "71CE67D8",
-    "lastKnownWriteTime" : 1445171300,
+    "lastKnownWriteTime" : 1445175889,
     "path" : "C:/Users/Alex/Google Drive/Personal/COURSERA/8.Machine Learning/Machine Learning Lectures/Machine Learning Lectures/Quiz3-Q5-vowelTrain.R",
     "project_path" : "Quiz3-Q5-vowelTrain.R",
     "properties" : {
