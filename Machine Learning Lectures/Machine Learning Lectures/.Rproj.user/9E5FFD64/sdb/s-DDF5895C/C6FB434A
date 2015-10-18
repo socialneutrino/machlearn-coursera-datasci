@@ -1,0 +1,17 @@
+{
+    "contents" : "library(ElemStatLearn)\ndata(SAheart)\nset.seed(8484)\ntrain = sample(1:dim(SAheart)[1],size=dim(SAheart)[1]/2,replace=F)\ntrainSA = SAheart[train,]\ntestSA = SAheart[-train,]\nset.seed(13234)\n#Coronary Heart Disease (chd) as the outcome and age at onset, \n#current alcohol consumption, obesity levels, cumulative tabacco, \n#type-A behavior, and low density lipoprotein cholesterol as predictors\nlogModel <- train(chd ~ age +alcohol + obesity + tobacco + typea + ldl,\n                  method=\"glm\", family=\"binomial\", data=trainSA)\n\n##missclassification function\nmissClass = function(values,prediction){sum(((prediction > 0.5)*1) != values)/length(values)}\n\npredTrain <- predict(logModel)\nmissClass(trainSA$chd, predTrain)\npredTest <- predict(logModel, newdata=testSA)\nmissClass(testSA$chd, predTest)",
+    "created" : 1445106640029.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2879703381",
+    "id" : "C6FB434A",
+    "lastKnownWriteTime" : 1445171257,
+    "path" : "C:/Users/Alex/Google Drive/Personal/COURSERA/8.Machine Learning/Machine Learning Lectures/Machine Learning Lectures/quiz3-q4-Hdisease.R",
+    "project_path" : "quiz3-q4-Hdisease.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

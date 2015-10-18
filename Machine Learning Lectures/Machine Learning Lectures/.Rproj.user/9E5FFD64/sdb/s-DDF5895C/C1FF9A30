@@ -1,0 +1,17 @@
+{
+    "contents" : "]#\n\nlibrary(AppliedPredictiveModeling)\ndata(segmentationOriginal)\nlibrary(caret)\nset.seed(125)\n\n#what is wrong with my partitioning?\n#inTrain <- createDataPartition(y=segmentationOriginal$Case, times=1, list=FALSE)\n\ntrain.1 <- segmentationOriginal[segmentationOriginal$Case==\"Train\",]\ntest.1 <- segmentationOriginal[segmentationOriginal$Case==\"Test\",]\ntr <- train(Class ~ ., method = \"rpart\", data = train.1)\n\nfancyRpartPlot(tr$finalModel)\n",
+    "created" : 1445095578625.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1677340966",
+    "id" : "C1FF9A30",
+    "lastKnownWriteTime" : 1445106364,
+    "path" : "C:/Users/Alex/Google Drive/Personal/COURSERA/8.Machine Learning/Machine Learning Lectures/Machine Learning Lectures/Decision Tree Quiz 3 Q1.R",
+    "project_path" : "Decision Tree Quiz 3 Q1.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "library(caret)\n> library(AppliedPredictiveModeling)\n> set.seed(3433)\n> data(AlzheimerDisease)\n> adData = data.frame(diagnosis,predictors)\n> inTrain = createDataPartition(adData$diagnosis, p = 3/4)[[1]]\n> training = adData[ inTrain,]\n> testing = adData[-inTrain,]\n> preProc <- preProcess(ILtrain, method=\"pca\", thresh=0.8)\n> preProc\n\nCall:\n  preProcess.default(x = ILtrain, method = \"pca\", thresh = 0.8)\n\nCreated from 251 samples and 12 variables\nPre-processing: principal component signal extraction, scaled, centered \n\nPCA needed 7 components to capture 80 percent of the variance\n> ILtrain <- training[,58:69]\n> ",
+    "created" : 1444681539701.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3609418676",
+    "id" : "2F93CD3A",
+    "lastKnownWriteTime" : 1444681563,
+    "path" : "C:/Users/Alex/Google Drive/Personal/COURSERA/8.Machine Learning/Machine Learning Lectures/Machine Learning Lectures/PCAexample.R",
+    "project_path" : "PCAexample.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

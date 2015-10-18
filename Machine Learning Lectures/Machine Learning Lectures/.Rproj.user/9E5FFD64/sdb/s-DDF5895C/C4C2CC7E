@@ -1,0 +1,17 @@
+{
+    "contents" : "library(pgmm)\ndata(olive)\nolive = olive[,-1]\ninTrain <- createDataPartition(y=olive$Area, p=0.7, list=FALSE)\ntraining <- olive[inTrain,]\ntesting <- olive[-inTrain,]\nmodFit <- train(Area ~ .,method=\"rpart\",data=training)\nprint(modFit$finalModel)\nnewdata = as.data.frame(t(colMeans(olive)))\npredict(modFit,newdata)",
+    "created" : 1445106050432.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2173372772",
+    "id" : "C4C2CC7E",
+    "lastKnownWriteTime" : 1445106688,
+    "path" : "C:/Users/Alex/Google Drive/Personal/COURSERA/8.Machine Learning/Machine Learning Lectures/Machine Learning Lectures/quiz3-q1-olives.R",
+    "project_path" : "quiz3-q1-olives.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
