@@ -39,7 +39,7 @@ GBM=confusionMatrix(vowel.test$y,predict(modGBM, vowel.test))$overall[1],
 Agree=sum(modpredict$agreepredict)/sum(modpredict$agree))
 
 
-##Question 2
+##Question 2 - stacking predictions into RF
 
 library(caret)
 library(gbm)
@@ -74,3 +74,54 @@ test.accuracy <- data.frame(RF=confusionMatrix(testing$diagnosis, test.RF)$overa
                             GBM=confusionMatrix(testing$diagnosis, test.GBM)$overall[1],
                             LDA=confusionMatrix(testing$diagnosis, test.LDA)$overall[1],
                             stacked=confusionMatrix(testing$diagnosis, predict.comb)$overall[1])
+
+##Question 3
+set.seed(3523)
+library(AppliedPredictiveModeling)
+data(concrete)
+inTrain = createDataPartition(concrete$CompressiveStrength, p = 3/4)[[1]]
+training = concrete[ inTrain,]
+testing = concrete[-inTrain,]
+
+set.seed(233)
+library(lars)
+lasso.fit <- lars(as.matrix(training[,-9]), training$CompressiveStrength, type="lasso", trace=TRUE)
+lasso.enet <- enet(as.matrix(training[,-9]), training$CompressiveStrength, lambda = 0)
+
+##Question 4 - forecasts and time series
+
+download.file(url="https://d396qusza40orc.cloudfront.net/predmachlearn/gaData.csv",
+              destfile="gaData.csv")
+library(lubridate)  
+
+# For year() function below
+dat = read.csv("gaData.csv")
+training = dat[year(dat$date) < 2012,]
+testing = dat[(year(dat$date)) > 2011,]
+tstrain = ts(training$visitsTumblr)
+
+library(forecast)
+forecast.fit <- bats(tstrain)
+forecast.test <- predict(forecast.fit, ts(testing$visitsTumblr))
+fcast <- forecast(fit,h=235)
+bounds <- data.frame(lower=fcast$lower[,2], upper=fcast$upper[,2], test=ts(testing$visitsTumblr))
+bounds$inRange <- (bounds$test > bounds$lower) * (bounds$test < bounds$upper)
+
+# Question 5
+
+set.seed(3523)
+library(AppliedPredictiveModeling)
+data(concrete)
+inTrain = createDataPartition(concrete$CompressiveStrength, p = 3/4)[[1]]
+training = concrete[ inTrain,]
+testing = concrete[-inTrain,]
+
+set.seed(325)
+fit.svm <- svm(CompressiveStrength ~., data=training)
+predict.svm <- predict(fit.svm, testing)
+svm.residuals <- (predict.svm - testing$CompressiveStrength)
+rmse <- function(error)
+{
+  sqrt(mean(error^2))
+}
+rmse(svm.residuals)
